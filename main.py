@@ -93,7 +93,7 @@ def main():
                                         white_moves = not white_moves
                                     else:
                                         if (selected_pos[0] + 1 == clicked_pos[0] or selected_pos[0] - 1 ==
-                                                clicked_pos[0]) and selected_pos[1] - 1 == clicked_pos[1]:
+                                            clicked_pos[0]) and selected_pos[1] - 1 == clicked_pos[1]:
                                             BOARD.move(selected_pos, clicked_pos)
                                             white_moves = not white_moves
                                 else:
@@ -104,9 +104,15 @@ def main():
                                             BOARD.move(selected_pos, clicked_pos)
                                             white_moves = not white_moves
 
+                            elif BOARD.board[selected_pos[1]][selected_pos[0]][1] == 'r':
+                                if (selected_pos[0] == clicked_pos[0] or selected_pos[1] == clicked_pos[
+                                        1]) and selected_pos != clicked_pos:
+                                    BOARD.move(selected_pos, clicked_pos)
+                                    white_moves = not white_moves
                             else:
                                 BOARD.move(selected_pos, clicked_pos)
                                 white_moves = not white_moves
+
                     else:
                         if BOARD.board[selected_pos[1]][selected_pos[0]][0] == 'b':
                             print(BOARD.board[selected_pos[1]][selected_pos[0]][1])
@@ -121,12 +127,12 @@ def main():
                                     if selected_pos[1] == 1:
                                         if selected_pos[0] == clicked_pos[0]:
                                             if selected_pos[1] + 2 == clicked_pos[1] and selected_pos[0] == clicked_pos[
-                                                    0] and BOARD.board[clicked_pos[1]][clicked_pos[0]] == '--':
+                                                0] and BOARD.board[clicked_pos[1]][clicked_pos[0]] == '--':
                                                 BOARD.move(selected_pos, clicked_pos)
                                                 white_moves = not white_moves
                                         else:
                                             if (selected_pos[0] + 1 == clicked_pos[0] or selected_pos[0] - 1 ==
-                                                    clicked_pos[0]) and selected_pos[1] + 1 == clicked_pos[1]:
+                                                clicked_pos[0]) and selected_pos[1] + 1 == clicked_pos[1]:
                                                 BOARD.move(selected_pos, clicked_pos)
                                                 white_moves = not white_moves
 
