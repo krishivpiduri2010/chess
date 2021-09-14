@@ -103,12 +103,35 @@ def main():
                                                 == '--':
                                             BOARD.move(selected_pos, clicked_pos)
                                             white_moves = not white_moves
-
+                            # ROOK MOVEMENT CHECKING
                             elif BOARD.board[selected_pos[1]][selected_pos[0]][1] == 'r':
-                                if (selected_pos[0] == clicked_pos[0] or selected_pos[1] == clicked_pos[
-                                        1]) and selected_pos != clicked_pos:
-                                    BOARD.move(selected_pos, clicked_pos)
-                                    white_moves = not white_moves
+                                if (selected_pos[0] == clicked_pos[0]) and selected_pos != clicked_pos:
+                                    print(selected_pos[1],clicked_pos[1])
+                                    if selected_pos[0] == clicked_pos[0]:
+                                        column = []
+                                        for row in BOARD.board:
+                                            column.append(row[clicked_pos[0]])
+                                        pieces=column[selected_pos[1]:clicked_pos[1]:1 if selected_pos[1]<clicked_pos[1] else -1]
+                                        pieces.pop(0)
+                                        try:
+                                            pieces.pop(-1)
+                                        except IndexError:
+                                            pass
+                                        if all(ele == '--' for ele in pieces):
+                                            BOARD.move(selected_pos, clicked_pos)
+                                            white_moves = not white_moves
+                                elif selected_pos[1] == clicked_pos[1]:
+                                    print(selected_pos[0],clicked_pos[0])
+                                    column = []
+                                    for row in BOARD.board:
+                                        column.append(row[clicked_pos[0]])
+                                    pieces=column[selected_pos[0]:clicked_pos[0]:1 if selected_pos[0]<clicked_pos[0] else -1]
+                                    pieces.pop(0)
+                                    pieces.pop(-1)
+                                    if all(ele == '--' for ele in pieces):
+                                        BOARD.move(selected_pos, clicked_pos)
+                                        white_moves = not white_moves
+
                             else:
                                 BOARD.move(selected_pos, clicked_pos)
                                 white_moves = not white_moves
