@@ -152,6 +152,28 @@ def main():
                                     selected_pos[1] - clicked_pos[1]) == 2):
                                     BOARD.move(selected_pos, clicked_pos)
                                     white_moves = not white_moves
+                            # BISHOP MOVEMENT
+                            elif BOARD.board[selected_pos[1]][selected_pos[0]][1] == 'b':
+                                print('bishop',abs(selected_pos[0] - clicked_pos[0]),abs(clicked_pos[0] - selected_pos[0]))
+                                if abs(selected_pos[0] - clicked_pos[1]) == abs(clicked_pos[0] - selected_pos[1]):
+                                    print('inside if')
+                                    column=selected_pos[0]
+                                    path = []
+                                    for row in range(len(BOARD.board)-1,0,-1):
+                                        try:
+                                            if row != len(BOARD.board)-1:
+                                                print('printed')
+                                                print(piece:=(BOARD.board[row][column]),column)
+                                                path.append(piece)
+                                        except IndexError:
+                                            break
+                                        if selected_pos[0] - clicked_pos[1]<0 or clicked_pos[0] - selected_pos[0]<0:
+                                            if column>0:
+                                                column-=1
+                                        column+=1
+                                    if all(ele == '--' for ele in path):
+                                        BOARD.move(selected_pos, clicked_pos)
+                                        white_moves = not white_moves
                             else:
                                 BOARD.move(selected_pos, clicked_pos)
                                 white_moves = not white_moves
